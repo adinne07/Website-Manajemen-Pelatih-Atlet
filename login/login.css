@@ -1,123 +1,186 @@
+/* Update CSS dengan Palette Elite Performance */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
-  height: 100vh;
-  background: #f4f6f9;
+  /* Menggunakan Off-White untuk latar belakang agar lebih bersih */
+  background: #F8F9FA; 
 }
 
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-/* LEFT */
+/* LEFT SIDE - FORM */
 .left {
   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #ffffff;
+  overflow-y: auto;
+  padding: 40px 0;
 }
 
 .form-box {
   width: 70%;
+  padding: 20px 0;
 }
 
+/* Heading Utama: Navy Blue */
 .form-box h2 {
-  color: #1e3a8a;
+  color: #1B3061; 
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
 }
 
 .subtitle {
   font-size: 14px;
-  margin-bottom: 20px;
-  color: #777;
+  margin-bottom: 10px;
+  color: #4A4A4A; /* Charcoal Grey untuk teks pendukung */
+}
+
+.description {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.6;
 }
 
 .form-box h3 {
   margin-bottom: 20px;
+  color: #333;
 }
 
 .input-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .input-group label {
   font-size: 14px;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  color: #1B3061;
+  font-weight: 600;
 }
 
+/* Field Input Modern */
 .input-group input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #E0E0E0;
+  background: #FDFDFD;
+  transition: all 0.3s ease;
+}
+
+/* Border berubah warna saat diklik (focus) */
+.input-group input:focus {
+  outline: none;
+  border-color: #1B3061;
+  box-shadow: 0 0 0 3px rgba(27, 48, 97, 0.1);
 }
 
 .options {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .options a {
   text-decoration: none;
-  color: #1e3a8a;
+  color: #1B3061;
+  font-weight: 600;
 }
 
+.options a:hover {
+  text-decoration: underline;
+}
+
+/* Tombol Utama: Navy Blue dengan efek hover Golden Yellow */
 button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: none;
-  background: #1e3a8a;
+  background: #1B3061;
   color: white;
   border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(27, 48, 97, 0.2);
 }
 
 button:hover {
   background: #14265c;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(27, 48, 97, 0.3);
 }
 
 .signup {
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 14px;
+  text-align: center;
+  color: #666;
 }
 
+/* Link Daftar Menggunakan Navy Blue yang Lebih Cerah */
 .signup a {
-  color: #1e3a8a;
+  color: #2D5BFF; 
   text-decoration: none;
+  font-weight: bold;
 }
 
-/* RIGHT */
+.signup a:hover {
+  text-decoration: underline;
+}
+
+/* RIGHT SIDE - IMAGE */
 .right {
   width: 50%;
   background-size: cover;
   background-position: center;
   position: relative;
-  transition: background-image 0.5s ease-in-out;
+}
+
+/* Tambahkan overlay sedikit gelap agar teks di gambar lebih terbaca */
+.right::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.2); 
 }
 
 .overlay {
   position: absolute;
-  bottom: 50px;
+  bottom: 60px;
   left: 40px;
   color: white;
+  z-index: 1;
 }
 
 .overlay h1 {
-  font-size: 28px;
+  font-size: 32px;
+  text-transform: uppercase;
+  font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
+/* Sub-heading gambar menggunakan Golden Yellow */
 .overlay h2 {
-  color: #60a5fa;
+  color: #FFC107; 
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
 /* RESPONSIVE */
@@ -126,8 +189,55 @@ button:hover {
     flex-direction: column;
   }
 
-  .left, .right {
+  .right {
     width: 100%;
-    height: 50%;
+    height: 35vh;
+    order: 1;
+  }
+
+  .left {
+    width: 100%;
+    order: 2;
+    padding: 30px 20px;
+  }
+
+  .form-box {
+    width: 100%;
   }
 }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .right {
+    width: 100%;
+    height: 40vh;
+    order: 1;
+  }
+
+  .left {
+    width: 100%;
+    height: auto;
+    padding: 40px 20px;
+    order: 2;
+    align-items: flex-start;
+  }
+
+  .form-box {
+    width: 85%;
+    padding: 20px 0;
+  }
+
+  .overlay h1 {
+    font-size: 1.5rem;
+  }
+  .overlay h2 {
+    font-size: 1.2rem;
+  }
+}
+

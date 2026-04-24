@@ -1,9 +1,9 @@
 // Array gambar dari folder asset
 const images = [
-  '../asset/bg lg 1.jpg',
-  '../asset/bg lg 2.jpg',
-  '../asset/bg lg 3.jpg',
-  '../asset/bg lg 4.jpg'
+  '../asset/badminton2hd.jpg',
+  '../asset/bola.jpg',
+  '../asset/lari3.jpg',
+  '../asset/silat.jpg'
 ];
 
 let currentImageIndex = 0;
