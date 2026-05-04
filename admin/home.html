@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Kontingen - ATLET</title>
+  <link rel="stylesheet" href="home-styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-content">
+    <div class="logo">
+      <h1>🏅 ATLET</h1>
+      <p class="logo-subtitle">Sistem Kontingen</p>
+    </div>
+    <div class="header-actions">
+      <span class="user-info" id="userInfo">User</span>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+  <div class="home-content">
+    
+    <!-- SECTION 1: BUAT KONTINGEN -->
+    <div class="section">
+      <div class="section-icon">📝</div>
+      <h2>Buat Kontingen Baru</h2>
+      <p>Buat kontingen baru dan dapatkan kode unik untuk dibagikan</p>
+      <button class="btn-large btn-create" onclick="openCreateModal()">
+        ➕ Buat Kontingen
+      </button>
+    </div>
+
+    <!-- SECTION 2: MASUK KONTINGEN -->
+    <div class="section">
+      <div class="section-icon">🔐</div>
+      <h2>Masuk Kontingen dengan Kode</h2>
+      <p>Masukkan kode kontingen untuk mengakses</p>
+      <div class="join-form">
+        <input type="text" id="joinCode" placeholder="Masukkan kode kontingen (contoh: ABC123)" maxlength="8" class="input-code">
+        <button class="btn-primary" onclick="joinKontingen()">Masuk</button>
+      </div>
+    </div>
+
+    <!-- SECTION 3: KONTINGEN SAYA -->
+    <div class="section section-full">
+      <div class="section-header">
+        <h2>📚 Kontingen Saya</h2>
+        <p>Daftar kontingen yang Anda kelola</p>
+      </div>
+      <div class="kontingen-grid" id="kontigenGrid">
+        <!-- Akan dimuat oleh JavaScript -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL: BUAT KONTINGEN -->
+<div id="createModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Buat Kontingen Baru</h3>
+      <button class="close-btn" onclick="closeModal('createModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="createForm">
+        <div class="form-group">
+          <label>Nama Kontingen</label>
+          <input type="text" id="kontigenName" placeholder="Contoh: Pelatihan Bulutangkis" required>
+        </div>
+        <div class="form-group">
+          <label>Deskripsi (Opsional)</label>
+          <textarea id="kontigenDesc" placeholder="Deskripsi kontingen..."></textarea>
+        </div>
+        <div class="button-group">
+          <button type="button" class="btn-secondary" onclick="closeModal('createModal')">Batal</button>
+          <button type="submit" class="btn-primary">Buat</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="home.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Admin Dashboard - ATHLETE</title>
+  <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-content">
+    <div class="logo">
+      <h1>🏅 ATLET - Super Admin</h1>
+      <p class="logo-subtitle">Pusat Kontrol Sistem</p>
+    </div>
+    <div class="header-actions">
+      <span class="user-info" id="userInfo">Super Admin</span>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+</header>
+
+<!-- SIDEBAR NAVIGATION -->
+<div class="sidebar">
+  <nav class="nav-menu">
+    <button class="nav-item active" onclick="switchPage('dashboard')">
+      📊 Dashboard
+    </button>
+    <button class="nav-item" onclick="switchPage('kontingen')">
+      🏢 Manajemen Kontingen
+    </button>
+    <button class="nav-item" onclick="switchPage('admin')">
+      👥 Manajemen Admin
+    </button>
+    <button class="nav-item" onclick="switchPage('monitoring')">
+      🔍 Monitoring Data
+    </button>
+    <button class="nav-item" onclick="switchPage('activity')">
+      📝 Activity Log
+    </button>
+    <button class="nav-item" onclick="switchPage('export')">
+      📥 Export Data
+    </button>
+    <button class="nav-item" onclick="switchPage('settings')">
+      ⚙️ Pengaturan
+    </button>
+  </nav>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <!-- PAGE 1: DASHBOARD -->
+  <div id="dashboard" class="page active">
+    <h2>📊 Dashboard Statistik</h2>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🏢</div>
+        <div class="stat-info">
+          <h3>Total Kontingen</h3>
+          <p class="stat-number" id="totalKontingen">0</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">👨‍🏫</div>
+        <div class="stat-info">
+          <h3>Total Pelatih</h3>
+          <p class="stat-number" id="totalPelatih">0</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-info">
+          <h3>Total Atlet</h3>
+          <p class="stat-number" id="totalAtlet">0</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">📝</div>
+        <div class="stat-info">
+          <h3>Total Admin</h3>
+          <p class="stat-number" id="totalAdmin">0</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>📝 Aktivitas Terbaru</h3>
+      <div class="activity-list" id="recentActivity">
+        <div class="empty-state">Belum ada aktivitas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: MANAJEMEN KONTINGEN -->
+  <div id="kontingen" class="page">
+    <div class="page-header">
+      <h2>🏢 Manajemen Kontingen</h2>
+    </div>
+
+    <div class="kontingen-list" id="kontiigenList">
+      <div class="empty-state">Loading...</div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: MANAJEMEN ADMIN -->
+  <div id="admin" class="page">
+    <div class="page-header">
+      <h2>👥 Manajemen Admin (Pelatih)</h2>
+      <button class="btn-primary" onclick="openAddAdminModal()">+ Tambah Admin</button>
+    </div>
+
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Nama</th>
+          <th>Status</th>
+          <th>Kontingen</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="adminList">
+        <tr><td colspan="5" class="empty-state">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGE 4: MONITORING DATA -->
+  <div id="monitoring" class="page">
+    <h2>🔍 Monitoring Data Keseluruhan</h2>
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="switchMonitoringTab('pelatih')">
+        👨‍🏫 Pelatih
+      </button>
+      <button class="tab-button" onclick="switchMonitoringTab('atlet')">
+        👥 Atlet
+      </button>
+      <button class="tab-button" onclick="switchMonitoringTab('absensi')">
+        📋 Absensi
+      </button>
+    </div>
+
+    <div id="monitoringContent">
+      <div class="empty-state">Pilih tab untuk melihat data</div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: ACTIVITY LOG -->
+  <div id="activity" class="page">
+    <h2>📝 Activity Log - Tracking Perubahan</h2>
+
+    <div class="log-filters">
+      <input type="date" id="filterDate" class="filter-input">
+      <select id="filterType" class="filter-input">
+        <option value="">Semua Tipe</option>
+        <option value="create">Create</option>
+        <option value="edit">Edit</option>
+        <option value="delete">Delete</option>
+        <option value="login">Login</option>
+      </select>
+      <button class="btn-secondary" onclick="filterActivity()">Filter</button>
+    </div>
+
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th>Waktu</th>
+          <th>Admin</th>
+          <th>Tipe</th>
+          <th>Deskripsi</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody id="activityLog">
+        <tr><td colspan="5" class="empty-state">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGE 6: EXPORT DATA -->
+  <div id="export" class="page">
+    <h2>📥 Export Data Global</h2>
+
+    <div class="export-section">
+      <h3>Pilih Data yang Ingin Di-Export</h3>
+
+      <div class="export-options">
+        <div class="export-card">
+          <h4>📊 Data Atlet</h4>
+          <p>Semua atlet dari semua kontingen</p>
+          <button class="btn-primary" onclick="exportData('atlet', 'excel')">Excel</button>
+          <button class="btn-secondary" onclick="exportData('atlet', 'csv')">CSV</button>
+        </div>
+
+        <div class="export-card">
+          <h4>📋 Absensi</h4>
+          <p>Rekam absensi keseluruhan</p>
+          <button class="btn-primary" onclick="exportData('absensi', 'excel')">Excel</button>
+          <button class="btn-secondary" onclick="exportData('absensi', 'csv')">CSV</button>
+        </div>
+
+        <div class="export-card">
+          <h4>📅 Jadwal Pertandingan</h4>
+          <p>Semua jadwal dari semua kontingen</p>
+          <button class="btn-primary" onclick="exportData('jadwal', 'excel')">Excel</button>
+          <button class="btn-secondary" onclick="exportData('jadwal', 'csv')">CSV</button>
+        </div>
+
+        <div class="export-card">
+          <h4>📚 Program Latihan</h4>
+          <p>Semua program dari semua kontingen</p>
+          <button class="btn-primary" onclick="exportData('program', 'excel')">Excel</button>
+          <button class="btn-secondary" onclick="exportData('program', 'csv')">CSV</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 7: SETTINGS -->
+  <div id="settings" class="page">
+    <h2>⚙️ Pengaturan Sistem</h2>
+
+    <div class="settings-section">
+      <h3>🔐 Backup & Restore</h3>
+      <button class="btn-primary" onclick="backupData()">💾 Backup Data</button>
+      <button class="btn-secondary" onclick="restoreData()">📂 Restore Data</button>
+    </div>
+
+    <div class="settings-section">
+      <h3>🗑️ Pembersihan Data</h3>
+      <button class="btn-danger" onclick="clearOldLogs()">Hapus Log Lama</button>
+      <button class="btn-danger" onclick="clearAllData()">⚠️ Hapus Semua Data</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL: ADD ADMIN -->
+<div id="addAdminModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Tambah Admin (Pelatih) Baru</h3>
+      <button class="close-btn" onclick="closeModal('addAdminModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="addAdminForm">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="newUsername" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="newPassword" required>
+        </div>
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" id="newName" required>
+        </div>
+        <div class="button-group">
+          <button type="button" class="btn-secondary" onclick="closeModal('addAdminModal')">Batal</button>
+          <button type="submit" class="btn-primary">Tambah</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="admin-dashboard.js"></script>
+</body>
+</html>
