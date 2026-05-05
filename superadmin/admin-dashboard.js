@@ -434,29 +434,143 @@ function exportData(type, format) {
       const kontigenData = localStorage.getItem('kontingen_' + k.code);
       if (kontigenData) {
         const parsed = JSON.parse(kontigenData);
+
         (parsed.atlet || []).forEach(a => {
           data.push({
             'Kontingen': k.name,
-            'Nama': a.nama,
-            'Usia': a.usia,
-            'TTL': a.ttl,
-            'Prestasi': a.prestasi
+            'Nama Atlet': a.nama || '',
+            'Usia': a.usia || '',
+            'TTL': a.ttl || '',
+            'Prestasi': a.prestasi || ''
           });
         });
       }
     });
+
+  } else if (type === 'pelatih') {
+    allKontigen.forEach(k => {
+      const kontigenData = localStorage.getItem('kontingen_' + k.code);
+      if (kontigenData) {
+        const parsed = JSON.parse(kontigenData);
+
+        (parsed.pelatih || []).forEach(p => {
+          data.push({
+            'Kontingen': k.name,
+            'Nama Pelatih': p.nama || '',
+            'Usia': p.usia || '',
+            'TTL': p.ttl || '',
+            'No HP': p.noHp || p.hp || p.telepon || '',
+            'Alamat': p.alamat || '',
+            'Pengalaman': p.pengalaman || ''
+          });
+        });
+      }
+    });
+
+  } else if (type === 'pengukuran') {
+    allKontigen.forEach(k => {
+      const kontigenData = localStorage.getItem('kontingen_' + k.code);
+      if (kontigenData) {
+        const parsed = JSON.parse(kontigenData);
+
+        /*
+          Struktur data pengukuran bisa berbeda tergantung halaman input.
+          Kode ini dibuat fleksibel untuk membaca:
+          - parsed.pengukuran
+          - parsed.hasilTes
+          - parsed.tesPengukuran
+          - parsed.hasilPengukuran
+        */
+
+        const pengukuranList =
+          parsed.pengukuran ||
+          parsed.hasilTes ||
+          parsed.tesPengukuran ||
+          parsed.hasilPengukuran ||
+          [];
+
+        pengukuranList.forEach(item => {
+          data.push({
+            'Kontingen': k.name,
+            'Nama Atlet': item.namaAtlet || item.atlet || item.nama || '',
+            'Tanggal Tes': item.tanggal || item.tanggalTes || '',
+            'Tinggi Badan': item.tinggiBadan || item.tinggi || '',
+            'Berat Badan': item.beratBadan || item.berat || '',
+            'Lingkar Dada': item.lingkarDada || '',
+            'Lingkar Pinggang': item.lingkarPinggang || '',
+            'Lari': item.lari || '',
+            'Push Up': item.pushUp || item.pushup || '',
+            'Sit Up': item.sitUp || item.situp || '',
+            'Vertical Jump': item.verticalJump || '',
+            'Hasil': item.hasil || item.nilai || '',
+            'Keterangan': item.keterangan || ''
+          });
+        });
+      }
+    });
+
+  } else if (type === 'absensi') {
+    allKontigen.forEach(k => {
+      const kontigenData = localStorage.getItem('kontingen_' + k.code);
+      if (kontigenData) {
+        const parsed = JSON.parse(kontigenData);
+        const absensi = parsed.absensi || {};
+
+        Object.keys(absensi).forEach(tanggal => {
+          const records = absensi[tanggal];
+
+          if (Array.isArray(records)) {
+            records.forEach(record => {
+              data.push({
+                'Kontingen': k.name,
+                'Tanggal': tanggal,
+                'Nama': record.nama || '',
+                'Status': record.status || '',
+                'Keterangan': record.keterangan || ''
+              });
+            });
+          } else {
+            data.push({
+              'Kontingen': k.name,
+              'Tanggal': tanggal,
+              'Total Record': Array.isArray(records) ? records.length : 1
+            });
+          }
+        });
+      }
+    });
+
   } else if (type === 'jadwal') {
     allKontigen.forEach(k => {
       const kontigenData = localStorage.getItem('kontingen_' + k.code);
       if (kontigenData) {
         const parsed = JSON.parse(kontigenData);
+
         (parsed.jadwal || []).forEach(j => {
           data.push({
             'Kontingen': k.name,
-            'Nama Pertandingan': j.nama,
-            'Tanggal': j.tanggal,
-            'Jam': j.jam,
-            'Tempat': j.tempat
+            'Nama Pertandingan': j.nama || '',
+            'Tanggal': j.tanggal || '',
+            'Jam': j.jam || '',
+            'Tempat': j.tempat || ''
+          });
+        });
+      }
+    });
+
+  } else if (type === 'program') {
+    allKontigen.forEach(k => {
+      const kontigenData = localStorage.getItem('kontingen_' + k.code);
+      if (kontigenData) {
+        const parsed = JSON.parse(kontigenData);
+
+        (parsed.program || parsed.programLatihan || []).forEach(p => {
+          data.push({
+            'Kontingen': k.name,
+            'Nama Program': p.nama || p.namaProgram || '',
+            'Tanggal': p.tanggal || '',
+            'Waktu': p.waktu || p.jam || '',
+            'Deskripsi': p.deskripsi || p.keterangan || ''
           });
         });
       }
@@ -471,7 +585,6 @@ function exportData(type, format) {
 
   logActivity('export', `Export ${type} ke ${format}`);
 }
-
 function exportCSV(data, filename) {
   if (data.length === 0) {
     alert('Tidak ada data untuk di-export');

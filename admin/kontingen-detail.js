@@ -18,15 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Load kontingen data from localStorage
 function loadKontigenData() {
-  const selected = localStorage.getItem('selectedKontigen');
+  const selected = localStorage.getItem('currentKontigen');
+
   if (selected) {
     currentKontigen = JSON.parse(selected);
     displayKontigenInfo();
   } else {
+    // fallback kalau belum ada data
+    alert('Kontingen tidak ditemukan, kembali ke dashboard');
     window.location.href = 'home.html';
   }
 }
-
 // Display kontingen info
 function displayKontigenInfo() {
   document.getElementById('kontigenName').textContent = currentKontigen.name;

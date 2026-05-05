@@ -63,7 +63,6 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
     
     localStorage.setItem('activityLog', JSON.stringify(activityLog));
     
-    alert("Login berhasil! Mengarahkan...");
     
     // Redirect based on role
     setTimeout(function() {

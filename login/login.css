@@ -241,19 +241,19 @@ button:hover {
   }
 }
 
+/* ================= BACK BUTTON TOP LEFT ================= */
+
 .container {
-  position: relative; /* aman, tidak ganggu layout */
+  position: relative;
 }
 
-/* tombol di tengah pembatas kiri & kanan */
 .back-btn {
   position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 20px;
+  left: 20px;
 
-  width: 52px;
-  height: 52px;
+  width: 45px;
+  height: 45px;
 
   display: flex;
   align-items: center;
@@ -261,55 +261,33 @@ button:hover {
 
   border-radius: 50%;
 
-  /* GLASS EFFECT */
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-
+  /* clean modern look */
+  background: rgba(255, 255, 255, 0.9);
   color: #1B3061;
-  font-size: 18px;
   text-decoration: none;
+  font-size: 18px;
 
-  /* SHADOW PREMIUM */
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.15),
-    inset 0 0 0 1px rgba(255,255,255,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 
   z-index: 20;
   transition: all 0.3s ease;
 }
 
-/* garis estetika ke bawah */
-.back-btn::after {
-  content: "";
-  position: absolute;
-  bottom: -25px;
-  width: 2px;
-  height: 50px;
-  background: linear-gradient(to bottom, #1B3061, transparent);
-  opacity: 0.3;
-}
-
 /* hover effect */
 .back-btn:hover {
-  transform: translateX(-50%) translateY(-3px) scale(1.05);
   background: #1B3061;
   color: #fff;
-
-  box-shadow:
-    0 12px 28px rgba(0,0,0,0.25),
-    0 0 0 4px rgba(27,48,97,0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .back-btn {
-    top: 20px;
-    width: 45px;
-    height: 45px;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
     font-size: 16px;
-  }
-
-  .back-btn::after {
-    display: none;
   }
 }

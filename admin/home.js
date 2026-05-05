@@ -4,9 +4,9 @@ let kontigenList = [];
 
 document.addEventListener('DOMContentLoaded', function() {
   loadUserInfo();
+  loadKontigenData();
   renderKontigenCards();
   setupFormHandlers();
-  loadKontigenData();
 });
 
 // Log activity for super admin tracking
