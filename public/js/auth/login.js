@@ -195,7 +195,7 @@ if (loginForm) {
     if (foundUser.role === 'superadmin') {
       notify('Login berhasil! Masuk sebagai Super Admin.', 'success', 1200)
         .then(function () {
-          window.location.href = '../superadmin/admin-dashboard.html';
+          window.location.href = '../superadmin/dashboard.html';
         });
     } else {
       notify('Login berhasil! Selamat datang.', 'success', 1200)
