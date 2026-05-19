@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Log - Super Admin ATLET</title>
+
+  <link rel="stylesheet" href="../../../public/css/superadmin/admin-styles.css">
+  <link rel="stylesheet" href="../../../public/css/alert-style.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>🏅 ATLET - Super Admin</h1>
+        <p class="logo-subtitle">Pusat Kontrol Sistem</p>
+      </div>
+
+      <div class="header-actions">
+        <span class="user-info" id="userInfo">Super Admin</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <nav class="nav-menu">
+      <a class="nav-item" href="dashboard.html">📊 Dashboard</a>
+      <a class="nav-item" href="kontingen.html">🏢 Manajemen Kontingen</a>
+      <a class="nav-item" href="admin.html">👥 Manajemen Admin</a>
+      <a class="nav-item" href="monitoring.html">🔍 Monitoring Data</a>
+      <a class="nav-item active" href="activity-log.html">📝 Activity Log</a>
+      <a class="nav-item" href="export.html">📥 Export Data</a>
+      <a class="nav-item" href="settings.html">⚙️ Pengaturan</a>
+    </nav>
+  </aside>
+
+  <main class="container">
+    <section class="page active">
+      <h2>📝 Activity Log - Tracking Perubahan</h2>
+
+      <div class="log-filters">
+        <input type="date" id="filterDate" class="filter-input">
+
+        <select id="filterType" class="filter-input">
+          <option value="">Semua Tipe</option>
+          <option value="create">Create</option>
+          <option value="edit">Edit</option>
+          <option value="delete">Delete</option>
+          <option value="login">Login</option>
+        </select>
+
+        <button class="btn-secondary" onclick="filterActivity()">
+          Filter
+        </button>
+      </div>
+
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Waktu</th>
+            <th>Admin</th>
+            <th>Tipe</th>
+            <th>Deskripsi</th>
+            <th>Detail</th>
+          </tr>
+        </thead>
+
+        <tbody id="activityLog">
+          <tr>
+            <td colspan="5" class="empty-state">Loading...</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="../../../public/js/custom-alert.js"></script>
+  <script src="../../../public/js/superadmin/admin-dashboard.js"></script>
+</body>
+
+</html>
